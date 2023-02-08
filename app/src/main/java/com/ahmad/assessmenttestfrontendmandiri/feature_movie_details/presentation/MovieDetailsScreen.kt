@@ -1,4 +1,5 @@
-@file:OptIn(ExperimentalMaterialApi::class)
+@file:OptIn(ExperimentalMaterialApi::class, ExperimentalMaterialApi::class,
+    ExperimentalMaterialApi::class)
 
 package com.ahmad.assessmenttestfrontendmandiri.feature_movie_details.presentation
 
@@ -34,6 +35,7 @@ import com.ahmad.assessmenttestfrontendmandiri.R
 import com.ahmad.assessmenttestfrontendmandiri.core.reusable_compose.CustomTopAppBar
 import com.ahmad.assessmenttestfrontendmandiri.core.reusable_compose.RatingBar
 import com.ahmad.assessmenttestfrontendmandiri.destinations.MovieReviewsScreenDestination
+import com.ahmad.assessmenttestfrontendmandiri.destinations.MovieTrailerScreenDestination
 import com.ahmad.assessmenttestfrontendmandiri.feature_movie_by_genres.presentation.MoviesByGenreViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -172,7 +174,10 @@ fun MovieDetailsScreen(
                                     Text(text = "Movie Reviews")
                                 }
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Button(onClick = {  }) {
+                                Button(onClick = {
+                                    navigator.navigate(MovieTrailerScreenDestination(movieId = movieDetails.id))
+                                }
+                                ) {
                                     Text(text = "Movie Trailer")
                                 }
                             }
@@ -226,7 +231,8 @@ fun MovieDetailsScreen(
         if (state.isLoading) {
             Column(
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
             ) {
                 CircularProgressIndicator()
             }
